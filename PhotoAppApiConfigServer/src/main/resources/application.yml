@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: "PhotoAppApiConfigServer"
+  profiles:
+    active: "native"
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: "classpath:/config/projects"
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    stream:
+      username: "guest"
+      password: "guest"
+server:
+  port: 8012
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "busrefresh"
