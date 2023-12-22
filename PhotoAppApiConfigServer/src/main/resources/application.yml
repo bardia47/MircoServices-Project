@@ -21,3 +21,5 @@ management:
     web:
       exposure:
         include: "busrefresh"
+encrypt:
+  key: "posdff09eu098JHJKGHTTTTTT23423408uy98fh"

@@ -52,14 +52,14 @@ public class WebSecurity {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         http.csrf(csrf -> csrf.disable());
-        http.authorizeHttpRequests(auth -> {
+      /*  http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(antMatcher(HttpMethod.POST, "/users/"))//.permitAll()
                     .access(new WebExpressionAuthorizationManager(gateWayIp.stream().map(ip -> "hasIpAddress('" + ip + "')")
                             .collect(Collectors.joining(" or "))));
             auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
             auth.anyRequest().authenticated();
 
-        });
+        });*/
         http.addFilter(new AuthenticationFilter(authenticationManager, userService, tokenExpireTime, tokenSecret));
         http.authenticationManager(authenticationManager);
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
