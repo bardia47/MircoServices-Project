@@ -1,0 +1,5 @@
+encrypt:
+    key-store:
+        alias: test
+        location: classpath:/config/encryption/test.jks
+        password: pass123

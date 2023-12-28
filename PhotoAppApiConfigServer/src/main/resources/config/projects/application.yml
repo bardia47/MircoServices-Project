@@ -1,0 +1,29 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8010/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: ${PORT:0}
+spring:
+  devtools:
+    restart:
+      enabled: true
+  rabbitmq:
+    host: localhost
+    password: '{cipher}AYCqxJqm2JUxpFzVwhV7AWZK8eA1nskX60D3RvrFjvtCsfX14yhJbFTvBax/w68l9djnM+SG5oSU4WWZ+yEM7oJD9uzhWhGp759rt9pi4I3uF5/QQ0da4qagHDdgjnbyXdNj6uZLqG4kps7gmzxcjSP9vcgWKa5hExCpvCrgQnbP7cVDX2HwsiJtXTTcRfzXMxmtgDWN/7xPRA6q/1KjRt3hMGWGj+/N8thIcEA1SHC/oL4Bf5f5rA89t/ofIf/LIlb1Skfgs3TCm5eh6piTF0etmpiiGgMUJTbtzQZSvuxjpPjCPyuZOhZV4huuTcFs/fEW/YQXtSy1g76wXjveXUE0tFdGAiaLVYLU26l/TJwfG4N6qG8qQDt7IgqvDh+NNu2OJNqTPVkxEx/d8Onwg1lBS/nYMZs+diFXP7lBP2DKGZ/LeWkTZ6YeJlAuINwNCdj0Q6iWFtOFReAKwojX458B9u1KBpXgxLkjll3179u+sAEXdGpA6TBtWOwrpELPSD5rBpUgG2DqC41VK6vYMV1kjA3gk6V0YnwDqfVXurAtmg=='
+    port: 5672
+    username: guest
+  cloud:
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+token:
+  secret: '{cipher}AYBnhkfQpae9DwbScFIH9llvi5+bM1r3+HrXcwdK/W1yOglxEK4dp1Oa0jShVO+jXUJjWKl4eFppCUryCW/iNAmLbiSx0GBrq5NgFh9VL6zqUP0Mk0yYelzxmZ+wE7zYQaTjZlW+Pw0lh4mwGJBqddR3YSICX7lLjrA45SOzuWVAxtQYZJpfOoJ0wYWLUSCuP3EhS6wUdbeYpOV7uCfKIGzzf2lBFGjtBYwzJjXlZlCd7Dd5Mbt+rmi9X2QRGDajAM/+JtjvGwrRXoOyaHWGzGC8Z/YMnpREbGSDYYEfOfJ //mxi6eiVOqut2GgS2Thd23Qr5ASrsJm75BlHmXakOLigllTOvXc8ilMnqKvY1TS5pxBt+bun02kTxCY9OwscrBDuBfu7HRAN261u1HpDPFU1iU5OrF8phNQGlv8QCtpLl8WH83rSqZfLalymIJAO5XnElQ4vJUlvpNDSRjXIRVTlVAbc0lv45kXrLipK4ZBBUt4Z/lYUnPdKU/FRR0B6tOkmrArq9zL/c4fj15bDOcOs4wOjfxTXxGVVhAlUmYSsVS3y7/RsTnBp0GjWLxSJqOiTCxFICk6Vtbc+/NrWcRmzQZSs4JDqj7eWTstdjdY63A=='

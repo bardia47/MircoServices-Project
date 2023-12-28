@@ -1,0 +1,6 @@
+spring:
+    cloud:
+        config:
+            name: albums-ws
+    config:
+        import: optional:configserver:http://localhost:8012

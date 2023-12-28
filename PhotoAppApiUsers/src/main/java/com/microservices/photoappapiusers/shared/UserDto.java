@@ -1,10 +1,13 @@
 package com.microservices.photoappapiusers.shared;
 
+import com.microservices.photoappapiusers.model.AlbumResponseModel;
 import com.microservices.photoappapiusers.model.CreateUserRequestModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class UserDto extends CreateUserRequestModel {
@@ -22,4 +25,6 @@ public class UserDto extends CreateUserRequestModel {
     String email;
     private String userId;
     private String encryptedPassword;
+
+    private List<AlbumResponseModel> albums;
 }

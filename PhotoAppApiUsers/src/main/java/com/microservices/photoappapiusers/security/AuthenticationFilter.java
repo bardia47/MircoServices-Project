@@ -63,15 +63,15 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-     //   byte[] encoded = Base64.getEncoder().encode(tokenSecret.getBytes());
-     //   SecretKey secretKey = new SecretKeySpec(encoded, "SHA512");
+        //   byte[] encoded = Base64.getEncoder().encode(tokenSecret.getBytes());
+        //   SecretKey secretKey = new SecretKeySpec(encoded, "SHA512");
         String username = ((User) authResult.getPrincipal()).getUsername();
         UserDto userDto = userService.getUserDetailsByEmail(username);
         String token = Jwts.builder()
                 .subject(userDto.getUserId()).expiration(Date.from(Instant.now().plusSeconds(tokenExpireTime)))
                 .issuedAt(Date.from(Instant.now())).signWith(
                         SignatureAlgorithm.HS256,
-                        Base64.getDecoder().decode(tokenSecret)
+                        tokenSecret.getBytes("UTF-8")
                 ).compact();
         response.addHeader("token", token);
         response.addHeader("userId", userDto.getUserId());

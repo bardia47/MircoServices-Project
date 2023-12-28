@@ -1,0 +1,6 @@
+#logging:
+#  file:
+#    name: albums-ws.log
+spring:
+  application:
+    name: albums-ws

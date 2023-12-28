@@ -1,0 +1,33 @@
+albums:
+  url: http://ALBUMS-WS/users/%s/albums
+eureka:
+  client:
+    instance-info-replication-interval-seconds: 1
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+gateway:
+  ip: 127.0.0.1,192.168.1.2
+management:
+  endpoint:
+    httpexchanges:
+      enabled: true
+spring:
+  application:
+    name: users-ws
+  datasource:
+    driverClassName: org.h2.Driver
+    password: ''
+    url: jdbc:h2:file:./TestDataBase
+    username: sa
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+token:
+  expire:
+    time: 360000

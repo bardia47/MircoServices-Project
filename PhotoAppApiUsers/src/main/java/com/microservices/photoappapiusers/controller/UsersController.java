@@ -3,6 +3,7 @@ package com.microservices.photoappapiusers.controller;
 import com.microservices.photoappapiusers.data.UserEntity;
 import com.microservices.photoappapiusers.model.CreateUserRequestModel;
 import com.microservices.photoappapiusers.model.CreateUserResponseModel;
+import com.microservices.photoappapiusers.model.UserResponseModel;
 import com.microservices.photoappapiusers.service.UserService;
 import com.microservices.photoappapiusers.shared.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +39,15 @@ public class UsersController {
         dto = service.createUser(dto);
         CreateUserResponseModel responseModel = mapper.map(dto, CreateUserResponseModel.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseModel);
+
+    }
+
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
+        UserDto userDto = service.getUserByUserId(userId);
+        UserResponseModel responseModel = new ModelMapper().map(userDto, UserResponseModel.class);
+        return ResponseEntity.status(HttpStatus.OK).body(responseModel);
+
 
     }
 }
