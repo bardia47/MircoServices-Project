@@ -1,6 +1,6 @@
 spring:
-    cloud:
-        config:
-            name: users-ws
+  cloud:
     config:
-        import: optional:configserver:http://localhost:8012
+      name: users-ws
+  config:
+    import: optional:configserver:http://localhost:8012

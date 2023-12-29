@@ -9,6 +9,11 @@ management:
     web:
       exposure:
         include: '*'
+    health:
+      show-details: true
+  health:
+    circuitbreakers:
+      enabled: true
 server:
   port: ${PORT:0}
 spring:
@@ -27,3 +32,15 @@ spring:
         enabled: true
 token:
   secret: '{cipher}AYC9xwmGmMNfQ1z8ptyc75pgiy3/6m+1R0iAXMnHBiGQmoYAWPez9DII6l1c0sfZqBosFk19vAYUP0GQIO5aGwYlJoJ7LSHKDcuRv/5ZEr0dM/Ncew77nCwTctbn/6tJJc57hLpHC2ft0QBAz3GbPrU3MeHo95puSHWHuFnrAhqMNTFRf4siUL2niSsHwIJtpemCZVsAv0OMblDX43ld/jkV8hslQCJlvDvBpDMFTCjuMgedwHoREF5NdiwqvqCjP4r3KyVY9V47QjOUl4LtRDA+zr+nGmxnTvVY9rS6sNQ9oujxmS56KjfX9d/6Y2zCcwwt2MYf2kKjxOdn69DGP6YTyzlz3bLCHc0Zy5fz8sEfxuVoDTuJCd9lB2vQsRA4/dr9rMSosgTjq/ypcoTYc1p7KqgjKPQtpAvuicusnSY/65hhY9eu9iNTLowHTHy6APx8mja9YHhMZwrXPuTfJQJQ18L0hIDwNA9i7o5af9HY8wJHy2YFgQMylxNJfUMWq3MTKnVQT47jRGEVDteMYAPvobpdqkQdVmtjvVjG0da+8peABV5VzM5rQp0KUElNizEGf1Iqx2xjIWpUKkCJg2QNbrSnNkXjn2FGfKlo5VTz8g=='
+resilience4j:
+  circuitbreaker:
+    instances:
+      albums-ws:
+        registerHealthIndicator: true
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        wait-duration-in-open-state: 10s
+        sliding-window-size: 2
+        sliding-window-type: count_based
+        minimum-number-of-calls: 10
+        event-consumer-buffer-size: 10
