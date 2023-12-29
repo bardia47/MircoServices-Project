@@ -5,6 +5,7 @@ import com.microservices.photoappapiusers.data.UserEntity;
 import com.microservices.photoappapiusers.data.UserRepository;
 import com.microservices.photoappapiusers.shared.UserDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
@@ -63,8 +66,11 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("user not found");
         UserDto userDto = new ModelMapper().map(entity, UserDto.class);
 
-
+        //  try {
         userDto.setAlbums(client.getAlbums(userId));
+        //  } catch (FeignException e) {
+        //       log.error(e.getLocalizedMessage());
+        //   }
         return userDto;
     }
 }

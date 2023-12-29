@@ -24,4 +24,9 @@ public class PhotoAppApiUsersApplication {
         return new InMemoryHttpExchangeRepository();
     }
 
+   /* @Bean
+    ErrorDecoder getErrorDecoder() {
+        return new FeginErrorDecoder();
+    }*/
+
 }
