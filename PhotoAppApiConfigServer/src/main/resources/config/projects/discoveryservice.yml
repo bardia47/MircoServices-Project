@@ -2,11 +2,12 @@ eureka:
   client:
     register-with-eureka: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
-  instance:
-    hostname: localhost
 server:
   port: 8010
 spring:
   application:
     name: discoveryservice
+  security:
+    user:
+      name: "test"
+      password: "{cipher}AYAAHVpnxSVtkU/hQ71ZoaKQJ9QE4DEoVlAtRHa4Y1XnNsy+XP06YXB/3CWo0OxHNRNS8g4cUR6N0K2jvdBAbcDhbi0M6sg6wlykiWQeIyINsQBdpcEm7WmneFDqG1FfO3oMUs0SvMfZ3/+42PjqztXr9VXcqBQ2njD1ZDvTWDDYIfL24uOSW4ZKZZGkOK9m7U4UI9X+ld4aDVMdCBF18ohKLT/k/OgovC4UZR6PYXm/V7fkWe3zGW/nxavsH2XMcoxNX/3nhQlIfsDIJ0JqVQmyE/PuUhKid5RJkN4hkZJ1fS3lXYH2oEMvcnIW/VfChq7K8Ri6QGuRze1UNJjMHtBZtLtDma8spHLBxNmonSXfPhaU1B7hPODV39e3qkh9FDZPz+YJpI4FSsc9FiX+3K7ESK8YdK6DKwyX2HI6HvXHa4+gIhC5xATDMDK2L8hIHlGUtmdTk6vU5rde9euxWB61Ob5czRvXcLDsBzmeIe0H4xyBMbJu+HYXd8cxuooqqJBNy2En4A2oMLjhxOsWAId1uJpyCXqOgUcehg/AdFW1CA=="

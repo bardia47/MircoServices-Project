@@ -1,7 +1,7 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8010/eureka
+      defaultZone: "{cipher}AYBKIdYArmPfvug2YbFkiMdmy1T2zVeFrAqVdmg4Oid2Ugau7tL12KwowE+H5P+browZ5pteGYRMcchZPZpfUHsVqFbAxv/KcniyJg7UDLHNyLVr3F5AvjuezCUWHJgg7uiY8P+CRWi4oLlDSwM1EFRajWuF3jPxk5kblQVBoYSOMpHN1YC0S3BPP+xMz15qlIzmrSrz1GNnlCMElmKe+SJoYGVsLsg+Fw1ZwvEG1tvR48MiAJ2MkB14oyKiPT4SKOyWBANms5NQyhgHfrltOAQyddbEODotY74I1ZAp03X6RqakG9IYjRfYgYYXaJiU7nkpzYIdNQWYcvHpUjVhdfA0yDqnXb3ExUE7tZoQfXdnRcBskh/rPyuF0HRb0AVn57wwFumQrqWoF08+0mYs/hmL2GvntTzogBXZ6k/wsamkHCsZankHm5NaHPad8/M3tSkkik43mjO9N8DQXhU42jsFsE9zwJU/djIorcNEAUMT6aqKIJgnrYU/QW6sdeWirZwQVViRXRJGbKFUkZtFGaJgi/HkizCU0BXszANpi67XNcJBV2UyqqfAWrMR4RrXsMW2Xw30ZHGM26EEWdGAbciv"
   instance:
     lease-renewal-interval-in-seconds: 5
 management:
