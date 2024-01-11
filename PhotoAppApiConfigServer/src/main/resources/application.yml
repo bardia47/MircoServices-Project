@@ -9,7 +9,7 @@ spring:
         native:
           search-locations: "classpath:/config/projects"
   rabbitmq:
-    host: "localhost"
+    host: "192.168.133.132"
     port: 5672
     stream:
       username: "guest"

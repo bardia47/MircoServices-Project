@@ -42,4 +42,6 @@ logging:
         photoappapiusers:
           service:
             AlbumsServiceClient: DEBUG
+            UserServiceImpl: DEBUG
+
 

@@ -14,6 +14,12 @@ management:
   health:
     circuitbreakers:
       enabled: true
+  tracing:
+    sampling:
+      probability: 1
+  zipkin:
+      tracing:
+        endpoint: http://192.168.133.132:9411/api/v2/spans
 server:
   port: ${PORT:0}
 spring:
@@ -21,7 +27,7 @@ spring:
     restart:
       enabled: true
   rabbitmq:
-    host: localhost
+    host: "192.168.133.132"
     password: '{cipher}AYCqxJqm2JUxpFzVwhV7AWZK8eA1nskX60D3RvrFjvtCsfX14yhJbFTvBax/w68l9djnM+SG5oSU4WWZ+yEM7oJD9uzhWhGp759rt9pi4I3uF5/QQ0da4qagHDdgjnbyXdNj6uZLqG4kps7gmzxcjSP9vcgWKa5hExCpvCrgQnbP7cVDX2HwsiJtXTTcRfzXMxmtgDWN/7xPRA6q/1KjRt3hMGWGj+/N8thIcEA1SHC/oL4Bf5f5rA89t/ofIf/LIlb1Skfgs3TCm5eh6piTF0etmpiiGgMUJTbtzQZSvuxjpPjCPyuZOhZV4huuTcFs/fEW/YQXtSy1g76wXjveXUE0tFdGAiaLVYLU26l/TJwfG4N6qG8qQDt7IgqvDh+NNu2OJNqTPVkxEx/d8Onwg1lBS/nYMZs+diFXP7lBP2DKGZ/LeWkTZ6YeJlAuINwNCdj0Q6iWFtOFReAKwojX458B9u1KBpXgxLkjll3179u+sAEXdGpA6TBtWOwrpELPSD5rBpUgG2DqC41VK6vYMV1kjA3gk6V0YnwDqfVXurAtmg=='
     port: 5672
     username: guest
