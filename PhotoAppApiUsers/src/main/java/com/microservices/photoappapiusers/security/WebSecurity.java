@@ -9,7 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -26,6 +30,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
+@EnableMethodSecurity
 @Configuration
 @EnableWebSecurity
 public class WebSecurity {
@@ -39,32 +44,51 @@ public class WebSecurity {
     @Value("${token.secret}")
     String tokenSecret;
 
-
+    @Autowired
+    @Lazy
     UserService userService;
 
-    public WebSecurity(@Lazy UserService userService) {
+    @Autowired
+    @Lazy
+    private JwtAuthFilter authFilter;
 
-        this.userService = userService;
-    }
 
     @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
         http.csrf(csrf -> csrf.disable());
-      /*  http.authorizeHttpRequests(auth -> {
+        http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(antMatcher(HttpMethod.POST, "/users/"))//.permitAll()
                     .access(new WebExpressionAuthorizationManager(gateWayIp.stream().map(ip -> "hasIpAddress('" + ip + "')")
                             .collect(Collectors.joining(" or "))));
+            auth.requestMatchers(antMatcher("/users/login")).permitAll();
+
             auth.requestMatchers(antMatcher("/h2-console/**")).permitAll();
             auth.anyRequest().authenticated();
-
-        });*/
-        http.addFilter(new AuthenticationFilter(authenticationManager, userService, tokenExpireTime, tokenSecret));
+        });
         http.authenticationManager(authenticationManager);
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+    // Password Encoding
+
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
