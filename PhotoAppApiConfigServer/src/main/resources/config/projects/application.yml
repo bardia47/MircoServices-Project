@@ -1,6 +1,6 @@
-logging:
-  file:
-    name: "${spring.application.name:}.log"
+#logging:
+#  file:
+#    name: "${spring.application.name:}.log"
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
 eureka:
@@ -42,7 +42,7 @@ spring:
       refresh:
         enabled: true
 token:
-  secret: '{cipher}AYC9xwmGmMNfQ1z8ptyc75pgiy3/6m+1R0iAXMnHBiGQmoYAWPez9DII6l1c0sfZqBosFk19vAYUP0GQIO5aGwYlJoJ7LSHKDcuRv/5ZEr0dM/Ncew77nCwTctbn/6tJJc57hLpHC2ft0QBAz3GbPrU3MeHo95puSHWHuFnrAhqMNTFRf4siUL2niSsHwIJtpemCZVsAv0OMblDX43ld/jkV8hslQCJlvDvBpDMFTCjuMgedwHoREF5NdiwqvqCjP4r3KyVY9V47QjOUl4LtRDA+zr+nGmxnTvVY9rS6sNQ9oujxmS56KjfX9d/6Y2zCcwwt2MYf2kKjxOdn69DGP6YTyzlz3bLCHc0Zy5fz8sEfxuVoDTuJCd9lB2vQsRA4/dr9rMSosgTjq/ypcoTYc1p7KqgjKPQtpAvuicusnSY/65hhY9eu9iNTLowHTHy6APx8mja9YHhMZwrXPuTfJQJQ18L0hIDwNA9i7o5af9HY8wJHy2YFgQMylxNJfUMWq3MTKnVQT47jRGEVDteMYAPvobpdqkQdVmtjvVjG0da+8peABV5VzM5rQp0KUElNizEGf1Iqx2xjIWpUKkCJg2QNbrSnNkXjn2FGfKlo5VTz8g=='
+  secret: '{cipher}AYCnZSMrJgadf1K3UsIDq/BsiOtz4lQmch08QEU/zzg2qtlUicTZcIlkmK6lHnj5CCDJxxbKuHsgrhs7TgTZBHNwXLuwCNzwIeqkpOvl3UWh8pOJ2zBPINapYul7akJMjaJF12umaw6hAwHH0cgV4uLlNA+gvLSVHUMws7xFvT+qCVlogN5Y80/L/IoE9wFfVMeryZEFJJ1ch371hK/qOP6/ZhyR/qPfUhpTUZJPHnAluGxlCCkqBaINALFWqCG3cU/Zp59CgzjvAJ2AqRSnQM5toKswbyA9E1wweys6zJdhMdyrHs4a3pkTFOQOIos5kygpcxBen0bYQR52VUw3AwGr4YeUIIsfx5uCLWWwurLxD2a+aMUvHEdbDcHiscuSieNCwZhI49hFQsG2u7SHCxRId4Q4kslRjw9aeLMCaR8UaixXKC2OvU23ksedpvpJV35zATVCDmeulb+YgsvYur2ySKZ3RJcE28tOvObr0SAg8aTy/K1TNEU2ATGye61A8soMOGIVZVBqkm5JWhjFV6GyC2F8UR+6+OAs3KsiJ3UkiVcSWcC2KHWKN8By9Qf5IEAJsJsG8yU2EiubRN3oBVs2/1zjAzVw3wjj6XBu0/G02OA5Bo58mXDlYgC0Mwv1ujo='
 resilience4j:
   circuitbreaker:
     circuit-breaker-aspect-order: 1

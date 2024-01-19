@@ -57,14 +57,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserByUserId(String userId) {
+    public UserDto getUserByUserId(String userId, String authorization) {
         UserEntity entity = repository.findByUserId(userId);
         if (entity == null)
             throw new UsernameNotFoundException("user not found");
         UserDto userDto = new ModelMapper().map(entity, UserDto.class);
 
         //  try {
-        userDto.setAlbums(client.getAlbums(userId));
+        userDto.setAlbums(client.getAlbums(userId, authorization));
         //  } catch (FeignException e) {
         //       log.error(e.getLocalizedMessage());
         //   }

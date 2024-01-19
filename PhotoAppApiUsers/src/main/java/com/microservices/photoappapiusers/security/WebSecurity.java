@@ -38,11 +38,6 @@ public class WebSecurity {
     List<String> gateWayIp;
 
 
-    @Value("${token.expire.time}")
-    Long tokenExpireTime;
-
-    @Value("${token.secret}")
-    String tokenSecret;
 
     @Autowired
     @Lazy

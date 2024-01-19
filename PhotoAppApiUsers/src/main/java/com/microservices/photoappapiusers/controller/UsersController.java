@@ -49,14 +49,25 @@ public class UsersController {
 
     }
 
-     @PreAuthorize("authentication.principal.userId == #userId")
-    @PostAuthorize("authentication.principal.userId == returnObject.getBody().getUserId()")
+    @PreAuthorize("hasRole('ADMIN') or authentication.principal.userId == #userId")
+    // @PreAuthorize("authentication.principal.userId == #userId")
+    //  @PostAuthorize("authentication.principal.userId == returnObject.getBody().getUserId()")
     @GetMapping(value = "/{userId}")
-    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
-        UserDto userDto = service.getUserByUserId(userId);
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId, @RequestHeader("Authorization") String authorization) {
+        UserDto userDto = service.getUserByUserId(userId, authorization);
         UserResponseModel responseModel = new ModelMapper().map(userDto, UserResponseModel.class);
         return ResponseEntity.status(HttpStatus.OK).body(responseModel);
     }
+
+    @PreAuthorize("hasRole('ADMIN') or hasAuthority('PROFILE_DELETE') or principal == #userId")
+    @DeleteMapping("/{userId}")
+    public String deleteUser(@PathVariable("userId") String userId) {
+
+        // Delete user logic here
+
+        return "Deleting user with id " + userId;
+    }
+
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -68,7 +79,9 @@ public class UsersController {
     public String authenticateAndGetToken(@RequestBody LoginRequestModel authRequest) {
         var authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authRequest.getEmail());
+            UserEntity userDto = service.loadUserByUsername(authRequest.getEmail());
+
+            return jwtService.generateToken(authRequest.getEmail(), userDto.getAuthorities());
         } else {
             throw new UsernameNotFoundException("invalid user request !");
         }
